@@ -29,8 +29,8 @@ Note: Subject to your system, modify these training files (*.py) to have the rig
 ```
 $ python CGDFNet_places365.py --evaluate
 ```
-
-Note: For instances of validation of CGDFNet, download the trained model of CGDFNet on Places365: [Click here](https://drive.google.com/drive/folders/1EdlA3tuOutBJMR23B-fcSOKKB69hAQ5R?usp=sharing). And then locate the downloaded file at ./runs/CGDFNet_g1_/
+https://drive.google.com/file/d/1BpoTBLcdAFwFVVv4dZJ5NxslqKcq5AQ8/view?usp=drive_link
+Note: For instances of validation of CGDFNet, download the trained model of CGDFNet on Places365: [Click here](https://drive.google.com/file/d/1BpoTBLcdAFwFVVv4dZJ5NxslqKcq5AQ8/view?usp=drive_link). And then locate the downloaded file at ./runs/CGDFNet_g1_/
 
 **Related citations:**
 
