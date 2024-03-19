@@ -7,7 +7,7 @@ from .SE_Attention import *
 from .common import conv1x1_block, conv3x3_block, conv3x3_dw_block, conv5x5_dw_block, SEUnit, Classifier
 class CGDF(torch.nn.Module):#defined for a CGDF block
     """
-    Depthwise-separable convolution (DSC) block internally used in MobileNets.
+    CGDF used in CGDFNet.
     """
     def __init__(self,
                  in_channels,
@@ -46,18 +46,16 @@ class CGDF(torch.nn.Module):#defined for a CGDF block
         self.SE = SE(out_channels, 16)
     def forward(self, x):
         residual = x
-        #print('vao1: ' + str(residual.size()))
+        
         x_dilated1 = self.conv_dw(x)        
         x_dilated2 = self.depthwise_dilated(x)
-        #print('vao2: ' + str(x.size()))
+        
         x = torch.cat((x_dilated1,x_dilated2),1)
         x = self.channel_shuffle(x)
         #x = self.conv_pw(x)
         x = self.conv_pw_shuffle(x)
         x = self.SE(x)
-        if self.stride == 1 and self.in_channels == self.out_channels:
-            #print('vao1: ' + str(residual.size()))
-            #print('vao2: ' + str(x.size()))
+        if self.stride == 1 and self.in_channels == self.out_channels:                    
             x = x + residual
         return x
     def channel_shuffle(self, x):
@@ -124,16 +122,16 @@ class CGDFNet(torch.nn.Module):
                 stage.add_module("unit{}".format(unit_id + 1), CGDF(in_channels=in_channels, out_channels=unit_channels, stride=stride,groups=groups))
                 in_channels = unit_channels
             self.backbone.add_module("stage{}".format(stage_id + 1), stage)
-        #Thanh Tuan Add start
+        
         self.final_conv_channels = 1024        
         self.backbone.add_module("final_conv", conv1x1_block(in_channels=in_channels, out_channels=self.final_conv_channels, activation="relu"))
         self.backbone.add_module("dropout1",torch.nn.Dropout2d(0.2))
-        #Thanh Tuan Add end
+        
         self.backbone.add_module("global_pool", torch.nn.AdaptiveAvgPool2d(output_size=1))
-        #Thanh Tuan Add start
+        
         self.backbone.add_module("dropout2",torch.nn.Dropout2d(0.2))
         in_channels = self.final_conv_channels
-        #Thanh Tuan Add end
+        
         # classifier
         self.classifier = Classifier(in_channels=in_channels, num_classes=num_classes)
 
@@ -146,14 +144,14 @@ class CGDFNet(torch.nn.Module):
                 torch.nn.init.kaiming_uniform_(module.weight)
                 if module.bias is not None:
                     torch.nn.init.constant_(module.bias, 0)            
-            #Thanh Tuan Add start
+            
             elif isinstance(module, torch.nn.Linear):                
                 module.weight.data.normal_(0, 0.01)
                 module.bias.data.zero_()
             elif isinstance(module, torch.nn.BatchNorm2d):                
                 module.weight.data.fill_(1)
                 module.bias.data.zero_()
-            #Thanh Tuan Add end
+            
         # classifier
         self.classifier.init_params()
 
