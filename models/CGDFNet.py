@@ -167,8 +167,7 @@ def build_CGDFNet(num_classes, width_multiplier=1.0, cifar=False,groups=2):
     
     """
 
-    init_conv_channels = 32
-    #channels = [[64], [128, 128], [256, 256, 256], [512, 512, 512], [512]]
+    init_conv_channels = 32    
     channels = [[64], [128, 128], [256, 256], [512, 512, 512, 512], [512]]
 
     if cifar:
