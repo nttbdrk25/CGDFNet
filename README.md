@@ -31,10 +31,11 @@ Note: For instances of validation of CGDFNet, download the trained model of CGDF
 If you use any materials, please cite the following relevant works.
 
 ```
-@article{CGDFNetNguyen24,
+@article{CGDFNetNguyen25,
   author       = {Thanh Tuan Nguyen, Hoang Anh Pham, and Thanh Phuong Nguyen},
   title        = {A light-weight backbone to adapt with extracting grouped dilation features},
   journal      = {Pattern Analysis and Applications},
-  note         = {(submitted in 2024)}
+  volume       = {28}
+  year         = {2025}
 }
 ```
