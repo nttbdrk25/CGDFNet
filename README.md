@@ -35,7 +35,10 @@ If you use any materials, please cite the following relevant works.
   author       = {Thanh Tuan Nguyen, Hoang Anh Pham, and Thanh Phuong Nguyen},
   title        = {A light-weight backbone to adapt with extracting grouped dilation features},
   journal      = {Pattern Analysis and Applications},
-  volume       = {28}
-  year         = {2025}
+  volume       = {28},
+  number       = {1},
+  pages        = {27},
+  year         = {2025},
+  url          = {https://doi.org/10.1007/s10044-024-01401-w},
 }
 ```
