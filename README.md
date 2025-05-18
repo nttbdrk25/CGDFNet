@@ -39,6 +39,6 @@ If you use any materials, please cite the following relevant works.
   number       = {1},
   pages        = {27},
   year         = {2025},
-  url          = {https://doi.org/10.1007/s10044-024-01401-w},
+  url          = {https://doi.org/10.1007/s10044-024-01401-w}
 }
 ```
